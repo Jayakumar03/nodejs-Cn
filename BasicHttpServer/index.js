@@ -4,6 +4,9 @@ const {
 const http = require('http');
 const port = 8000;
 const fs = require('fs');
+const {
+    profile
+} = require('console');
 
 const server = http.createServer(serverchecking);
 
@@ -12,15 +15,35 @@ function serverchecking(require, response) {
     response.writeHead(200, {
         'content-type': 'text/html'
     });
+    let filePath;
 
-    fs.readFile('./index.html', function (err, data) {
+    switch (require.url) {
+        case './':
+            filePath = './index.html';
+            break
+
+
+        case './about':
+            filePath = './about.html';
+            break;
+
+        case './profile':
+            filePath = './profile.html';
+            break;
+
+        default:
+            filePath = './404.html'
+            break;
+    }
+
+
+    fs.readFile(filePath, function (err, data) {
 
         if (err) {
             response.end('<h1>Error</h1>');
-        } else {
-
-            return response.end(data);
         }
+
+        return response.end(data);
 
     })
 
