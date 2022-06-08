@@ -14,7 +14,7 @@ function serverchecking(require, response) {
 
     response.writeHead(200, {
         'content-type': 'text/html'
-    });
+});
     let filePath;
 
     switch (require.url) {
@@ -36,7 +36,7 @@ function serverchecking(require, response) {
             break;
     }
 
-
+// fs means file system properties of dom
     fs.readFile(filePath, function (err, data) {
 
         if (err) {
